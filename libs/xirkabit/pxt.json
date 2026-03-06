@@ -23,7 +23,10 @@
         "control.ts",
         "pinscompat.cpp",
         "pinscompat.ts",
-        "input.ts"
+        "input.ts",
+        "sim/accel.ts",
+        "sensor/accel.ts",
+        "sensor/on.ts"
     ],
     "dependencies": {
         "core---samd": "file:../core---samd",
@@ -34,8 +37,7 @@
         "serial": "file:../serial",
         "buttons": "file:../buttons"
     },
-    "cppDependencies": {
-    },
+    "cppDependencies": {},
     "public": true,
     "dalDTS": {
         "corePackage": "../core---samd",
@@ -61,7 +63,7 @@
     "compileServiceVariant": "samd21",
     "yotta": {
         "config": {
-            "USB_DEFAULT_VID": "0x239B", 
+            "USB_DEFAULT_VID": "0x239B",
             "USB_DEFAULT_PID": "0x0002"
         }
     }

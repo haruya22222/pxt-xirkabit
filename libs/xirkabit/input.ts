@@ -1,4 +1,3 @@
-
 const enum TouchPin {
     P0 = DAL.CFG_PIN_P0,
     P1 = DAL.CFG_PIN_P1,
@@ -38,11 +37,11 @@ namespace input {
         return control.micros();
     }
 
-     /**
-     * Do something when a pin is touched and released again (while also touching the GND pin).
-     * @param name the pin that needs to be pressed, eg: TouchPin.P0
-     * @param body the code to run when the pin is pressed
-     */
+    /**
+    * Do something when a pin is touched and released again (while also touching the GND pin).
+    * @param name the pin that needs to be pressed, eg: TouchPin.P0
+    * @param body the code to run when the pin is pressed
+    */
     //% help=input/on-pin-pressed weight=83 blockGap=32
     //% blockId=device_pin_event block="on pin %name|pressed"
     export function onPinPressed(name: TouchPin, body: () => void): void {
@@ -78,8 +77,38 @@ namespace input {
     //% blockGap=8
     export function pinIsPressed(name: TouchPin): boolean {
         const pin = pins.pinByCfg(name) as DigitalInOutPin;
-        if(!pin) return false;
+        if (!pin) return false;
         pin.setPull(PinPullMode.PullUp);
         return pin.digitalRead() == false;
     }
+
+
+    export enum XirkabitDimension {
+        //% block="x"
+        X = 0,
+        //% block="y"
+        Y = 1,
+        //% block="z"
+        Z = 2,
+        //% block="strength"
+        Strength = 3
+    }
+
+
+    /**
+     * Get acceleration axis mg
+     */
+    //% blockId=xirkabit_acceleration
+    //% block="acceleration (mg) %axis"
+    export function acceleration(axis: XirkabitDimension): number {
+        switch (axis) {
+            case XirkabitDimension.X: return accelX();
+            case XirkabitDimension.Y: return accelY();
+            case XirkabitDimension.Z: return accelZ();
+            case XirkabitDimension.Strength: return accelStrength();
+        }
+        return 0;
+    }
+
+
 }
